@@ -1,4 +1,5 @@
 ﻿using IPA;
+using IPA.Loader;
 using IPA.Config;
 using IPA.Config.Stores;
 using System;
@@ -9,6 +10,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using IPALogger = IPA.Logging.Logger;
 using BS_Utils;
+using HarmonyLib;
 
 namespace RamenFixer
 {
@@ -17,6 +19,7 @@ namespace RamenFixer
     {
         internal static Plugin Instance { get; private set; }
         internal static IPALogger Log { get; private set; }
+        private Harmony _harmony;
 
         [Init]
         public void Init(IPALogger logger)
@@ -43,18 +46,9 @@ namespace RamenFixer
         {
             Log.Debug("OnApplicationStart");
 
-            BS_Utils.Utilities.BSEvents.gameSceneLoaded += GameSceneLoaded;
-            BS_Utils.Utilities.BSEvents.menuSceneLoaded += MenuSceneLoaded;
-        }
-
-        private void GameSceneLoaded()
-        {
-            RamenFixerController.LoadRamenFixer();
-        }
-
-        private void MenuSceneLoaded()
-        {
-            RamenFixerController.UnloadRamenFixer();
+            RamenLogic.Instance = new RamenLogic();
+            _harmony = new Harmony("dev.sena.ramenfixer");
+            _harmony.PatchAll();
         }
 
         [OnExit]

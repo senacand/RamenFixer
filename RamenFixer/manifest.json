@@ -3,12 +3,13 @@
   "id": "RamenFixer",
   "name": "RamenFixer",
   "author": "Mentega Goreng",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "Fixes issue where VirtualMotionCapture (VMC) Avatar does not respect NoodleExtensions Player Position and Rotation.",
   "gameVersion": "1.13.2",
   "dependsOn": {
     "BSIPA": "^4.1.4",
-    "BS Utils": "^1.7.0"
+    "BS Utils": "^1.7.0",
+    "VMCAvatar": "^0.3.2"
   },
   "features": []
 }
